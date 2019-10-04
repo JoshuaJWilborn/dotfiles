@@ -1,0 +1,17 @@
+*
+*/
+*/**/*
+!.vimrc
+!.bashrc
+!.inputrc
+!.tmux.conf
+!.zshrc
+!.prettierrc.json
+!.stylelintrc.json
+!.gitconfig
+!.gitignore
+!.editorconfig
+!.eslintrc.json
+!.config
+!.config/**/*
+

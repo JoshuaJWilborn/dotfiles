@@ -1,6 +1,6 @@
 [user]
-	name = kencoder97
-  email = vuhuucuong97@gmail.com
+	name  = Joshua Wilborn 
+  email = jwilborn@extron.com
 
 [alias]
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -11,6 +11,6 @@
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [core]
-	editor = nvim
+	editor = vim
 [credential]
-	helper = osxkeychain
+  helper = store

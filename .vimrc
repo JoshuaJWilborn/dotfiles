@@ -14,6 +14,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'junegunn/vim-easy-align'
@@ -35,15 +36,14 @@ Plug 'neoclide/jsonc.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'liuchengxu/vista.vim'
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-call plug#end()kkj
-
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+call plug#end()
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'typescript': ['typescript-language-server', '--stdio']
-    \ }
+      \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+      \ 'typescript': ['typescript-language-server', '--stdio']
+      \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
@@ -53,8 +53,10 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 
 
+set visualbell
 set rtp+=~/.fzf
 "Custom Config
+set showcmd
 set encoding=utf-8
 set fileencoding=utf-8
 set number
@@ -66,14 +68,22 @@ set backupcopy=yes
 set signcolumn=yes
 set hlsearch
 set directory^=$HOME/.vim/tmp//
+set softtabstop=0
+set tabstop=4
+set expandtab
+set shiftwidth=2
+set autoindent
+set smartindent
+set smarttab
 " Enable true color
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-
-"used for autocomplete when adding dash
+" show clock in airline
+let g:airline_section_b = '%{strftime("%H:%M")}'
+" used for autocomplete when adding dash
 set iskeyword+=\-
 
 "joshdick/onedark.vim
@@ -98,7 +108,7 @@ let g:NERDTreeDirArrowCollapsible = ''
 nmap <Leader>n :NERDTreeToggle<CR>
 
 "fzf
-nmap <c-p> :FZF<CR>
+nmap <c-p> :GFiles<CR>
 
 "matze/vim-move
 let g:move_key_modifier = 'S'
@@ -252,3 +262,32 @@ function! BufOnly(buffer, bang)
 endfunction
 
 nmap <Leader>o :BufOnly<CR>
+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! Osc52Yank()
+
+  let buffer=system('base64 -w0', @0)
+
+  let buffer=substitute(buffer, "\n$", "", "")
+
+  let buffer='\e]52;c;'.buffer.'\x07'
+
+  silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape("/dev/pts/0")
+
+endfunction
+
+command! Osc52CopyYank call Osc52Yank()
+
+augroup Example
+
+  autocmd!
+
+  autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
+
+augroup END
