@@ -14,4 +14,4 @@
 !.eslintrc.json
 !.config
 !.config/**/*
-
+**/node_modules

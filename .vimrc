@@ -1,5 +1,10 @@
+" Install vim-plug if it isn't already
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.vim/plugged')
-
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'w0rp/ale'
@@ -44,15 +49,12 @@ let g:LanguageClient_serverCommands = {
       \ 'rust': ['rustup', 'run', 'stable', 'rls'],
       \ 'typescript': ['typescript-language-server', '--stdio']
       \ }
-
+set cmdheight=2
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> <C-k> :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-
-
 set visualbell
 set rtp+=~/.fzf
 "Custom Config
@@ -87,11 +89,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " 
 if !exists('g:airline_symbols')
-
   let g:airline_symbols = {}
-
 endif
-
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = 'Ɇ'
@@ -104,18 +103,15 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 set iskeyword+=\-
-
 "joshdick/onedark.vim
 colorscheme onedark
 hi Comment guifg=#808080
-
 " set color split line
 set fillchars=vert:┃ " for vsplits
 set fillchars+=fold:· " for folds
 hi VertSplit guifg=#F08080
 " Directory color
 hi Directory guifg=#F08080
-
 "scrooloose/nerdtree
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
@@ -125,25 +121,19 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 nmap <Leader>n :NERDTreeToggle<CR>
-
 "fzf
 nmap <c-p> :GFiles<CR>
-
 "matze/vim-move
 let g:move_key_modifier = 'S'
-
 "alvan/vim-closetag
-
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
 "
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
-
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
 "
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js,*.tsx'
-
 " filetypes like xml, html, xhtml, ...
 " These are the file types where this plugin is enabled.
 " autoclose loclist when close buffer
@@ -151,24 +141,22 @@ augroup CloseLoclistWindowGroup
   autocmd!
   autocmd QuitPre * if empty(&buftype) | lclose | endif
 augroup END
-
 "scrooloose/nerdcommenter
-
 let NERDDefaultAlign="left"
-
 " mhinz/vim-startify
-
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
 hi StartifyHeader guifg=#FFD700
-
 "liuchengxu/vista.vim
 let g:vista_default_executive = 'coc'
+" Automatically install the extensions required for CoC to give us completion
+" and imports.  This method is preferable to using Vim Plug because it allows
+" easy updates of plugins and allows coc to uninstall them as well.
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp']
 nmap <Leader>v :Vista!!<CR>
-
 " BufOnly.vim  -  Delete all the buffers except the current/named buffer.
 "
 " Copyright November 2003 by Christian J. Robinson <infynity@onewest.net>
@@ -181,7 +169,6 @@ nmap <Leader>v :Vista!!<CR>
 "
 " Without any arguments the current buffer is kept.  With an argument the
 " buffer name/number supplied is kept.
-
 command! -nargs=? -complete=buffer -bang Bonly
       \ :call BufOnly('<args>', '<bang>')
 command! -nargs=? -complete=buffer -bang BOnly
@@ -190,7 +177,6 @@ command! -nargs=? -complete=buffer -bang Bufonly
       \ :call BufOnly('<args>', '<bang>')
 command! -nargs=? -complete=buffer -bang BufOnly
       \ :call BufOnly('<args>', '<bang>')
-
 function! BufOnly(buffer, bang)
   if a:buffer == ''
     " No buffer provided, use the current buffer.
@@ -202,16 +188,13 @@ function! BufOnly(buffer, bang)
     " A buffer name was provided.
     let buffer = bufnr(a:buffer)
   endif
-
   if buffer == -1
     echohl ErrorMsg
     echomsg "No matching buffer for" a:buffer
     echohl None
     return
   endif
-
   let last_buffer = bufnr('$')
-
   let delete_count = 0
   let n = 1
   while n <= last_buffer
@@ -230,42 +213,38 @@ function! BufOnly(buffer, bang)
     endif
     let n = n+1
   endwhile
-
   if delete_count == 1
     echomsg delete_count "buffer deleted"
   elseif delete_count > 1
     echomsg delete_count "buffers deleted"
   endif
-
 endfunction
-
 nmap <Leader>o :BufOnly<CR>
-
-
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+" Allows yanking even though SSH!!!
+" source:
+" https://github.com/fortes/dotfiles/blob/master/stowed-files/nvim/.vimrc
+" copy yank buffer to system clipboard
+" Use OSC52 to put things into the system clipboard, works over SSH!
 function! Osc52Yank()
-
   let buffer=system('base64 -w0', @0)
-
   let buffer=substitute(buffer, "\n$", "", "")
-
   let buffer='\e]52;c;'.buffer.'\x07'
-
-  silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape("/dev/pts/0")
-
+  " Need special escaping if within tmux
+  if $TMUX != ''
+    let buffer='\ePtmux;\e'.buffer.'\e\\'
+  endif
+  " Must output to /dev/tty, otherwise the escape codes don't make it out to the
+  " terminal
+  silent exe '!echo -ne '.shellescape(buffer).' > /dev/tty'
 endfunction
-
 command! Osc52CopyYank call Osc52Yank()
-
-augroup Example
-
-  autocmd!
-
-  autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
-
-augroup END
+" Copy yank register to system
+nnoremap <leader>y :Osc52CopyYank<cr>
+" Copy selection to system clipboard
+vnoremap <leader>y :<C-u>norm! gvy<cr>:Osc52CopyYank<cr>
+" }}}
