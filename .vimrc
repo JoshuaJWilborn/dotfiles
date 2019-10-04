@@ -1,18 +1,16 @@
 " Install vim-plug if it isn't already
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
+Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'w0rp/ale'
 Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'leafgarland/typescript-vim'
@@ -26,7 +24,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
@@ -63,6 +60,7 @@ set encoding=utf-8
 set fileencoding=utf-8
 set number
 set mouse=a
+set background=dark
 syntax on
 set splitright
 set splitbelow
@@ -104,7 +102,9 @@ let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 set iskeyword+=\-
 "joshdick/onedark.vim
-colorscheme onedark
+"colorscheme onedark
+colorscheme gruvbox-material
+let g:airline_theme = 'gruvbox_material'
 hi Comment guifg=#808080
 " set color split line
 set fillchars=vert:┃ " for vsplits
@@ -220,10 +220,14 @@ function! BufOnly(buffer, bang)
   endif
 endfunction
 nmap <Leader>o :BufOnly<CR>
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Allows yanking even though SSH!!!
 " source:

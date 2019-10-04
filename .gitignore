@@ -1,6 +1,7 @@
 *
 */
 */**/*
+!.readlinerc
 !.vimrc
 !.bashrc
 !.inputrc
