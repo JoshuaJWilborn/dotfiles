@@ -41,6 +41,7 @@ Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
       \ 'do': 'bash install.sh',
       \ }
+
 call plug#end()
 let g:LanguageClient_serverCommands = {
       \ 'rust': ['rustup', 'run', 'stable', 'rls'],
@@ -53,6 +54,9 @@ nnoremap <silent> <C-k> :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 set visualbell
+set autochdir
+set paste
+set hidden
 set rtp+=~/.fzf
 "Custom Config
 set showcmd
@@ -69,12 +73,24 @@ set signcolumn=yes
 set hlsearch
 set directory^=$HOME/.vim/tmp//
 set softtabstop=0
-set tabstop=4
+set tabstop=2
 set expandtab
 set shiftwidth=2
 set autoindent
 set smartindent
 set smarttab
+exec "set listchars=tab:\uBB\uBB,nbsp:~,trail:\uB7"
+set list
+let s:default_path = escape(&path, '\ ') " store default value of 'path'
+
+" Always add the current file's directory to the path and tags list if not
+" already there. Add it to the beginning to speed up searches.
+autocmd BufRead *
+      \ let s:tempPath=escape(escape(expand("%:p:h"), ' '), '\ ') |
+      \ exec "set path-=".s:tempPath |
+      \ exec "set path-=".s:default_path |
+      \ exec "set path^=".s:tempPath |
+      \ exec "set path^=".s:default_path
 " Enable true color
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -99,6 +115,8 @@ let g:airline_right_sep = ""
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 set iskeyword+=\-
 "joshdick/onedark.vim
@@ -112,15 +130,6 @@ set fillchars+=fold:· " for folds
 hi VertSplit guifg=#F08080
 " Directory color
 hi Directory guifg=#F08080
-"scrooloose/nerdtree
-let NERDTreeMinimalUI=1
-let NERDTreeShowHidden=1
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-" open close icon
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-nmap <Leader>n :NERDTreeToggle<CR>
 "fzf
 nmap <c-p> :GFiles<CR>
 "matze/vim-move
@@ -157,69 +166,15 @@ let g:vista_default_executive = 'coc'
 " easy updates of plugins and allows coc to uninstall them as well.
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-vimlsp']
 nmap <Leader>v :Vista!!<CR>
-" BufOnly.vim  -  Delete all the buffers except the current/named buffer.
-"
-" Copyright November 2003 by Christian J. Robinson <infynity@onewest.net>
-"
-" Distributed under the terms of the Vim license.  See ":help license".
-"
-" Usage:
-"
-" :Bonly / :BOnly / :Bufonly / :BufOnly [buffer]
-"
-" Without any arguments the current buffer is kept.  With an argument the
-" buffer name/number supplied is kept.
-command! -nargs=? -complete=buffer -bang Bonly
-      \ :call BufOnly('<args>', '<bang>')
-command! -nargs=? -complete=buffer -bang BOnly
-      \ :call BufOnly('<args>', '<bang>')
-command! -nargs=? -complete=buffer -bang Bufonly
-      \ :call BufOnly('<args>', '<bang>')
-command! -nargs=? -complete=buffer -bang BufOnly
-      \ :call BufOnly('<args>', '<bang>')
-function! BufOnly(buffer, bang)
-  if a:buffer == ''
-    " No buffer provided, use the current buffer.
-    let buffer = bufnr('%')
-  elseif (a:buffer + 0) > 0
-    " A buffer number was provided.
-    let buffer = bufnr(a:buffer + 0)
-  else
-    " A buffer name was provided.
-    let buffer = bufnr(a:buffer)
-  endif
-  if buffer == -1
-    echohl ErrorMsg
-    echomsg "No matching buffer for" a:buffer
-    echohl None
-    return
-  endif
-  let last_buffer = bufnr('$')
-  let delete_count = 0
-  let n = 1
-  while n <= last_buffer
-    if n != buffer && buflisted(n)
-      if a:bang == '' && getbufvar(n, '&modified')
-        echohl ErrorMsg
-        echomsg 'No write since last change for buffer'
-              \ n '(add ! to override)'
-        echohl None
-      else
-        silent exe 'bdel' . a:bang . ' ' . n
-        if ! buflisted(n)
-          let delete_count = delete_count+1
-        endif
-      endif
-    endif
-    let n = n+1
-  endwhile
-  if delete_count == 1
-    echomsg delete_count "buffer deleted"
-  elseif delete_count > 1
-    echomsg delete_count "buffers deleted"
-  endif
-endfunction
-nmap <Leader>o :BufOnly<CR>
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -229,6 +184,46 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+noremap <silent><expr> <c-space> coc#refresh()
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
 " Allows yanking even though SSH!!!
 " source:
 " https://github.com/fortes/dotfiles/blob/master/stowed-files/nvim/.vimrc
