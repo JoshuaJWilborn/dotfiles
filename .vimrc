@@ -8,7 +8,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+" colors
 Plug 'sainnhe/gruvbox-material'
+Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim/'
+" /colors
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -61,6 +65,7 @@ set iskeyword+=\-
 "joshdick/onedark.vim
 "colorscheme onedark
 colorscheme gruvbox-material
+colorscheme iceberg
 let g:airline_theme = 'gruvbox_material'
 hi Comment guifg=#808080
 " set color split line
