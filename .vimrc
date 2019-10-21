@@ -12,6 +12,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cocopon/iceberg.vim/'
+Plug 'fcpg/vim-orbital'
+Plug 'ajmwagar/vim-deus'
 " /colors
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
@@ -66,7 +68,6 @@ set iskeyword+=\-
 "colorscheme onedark
 colorscheme gruvbox-material
 colorscheme iceberg
-let g:airline_theme = 'gruvbox_material'
 hi Comment guifg=#808080
 " set color split line
 set fillchars=vert:┃ " for vsplits
