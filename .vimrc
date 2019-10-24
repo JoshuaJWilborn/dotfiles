@@ -46,6 +46,7 @@ set shiftwidth=2
 set autoindent
 set smartindent
 set smarttab
+set foldmethod=indent
 exec "set listchars=tab:\uBB\uBB,nbsp:~,trail:\uB7"
 set list
 set suffixesadd+=.js
