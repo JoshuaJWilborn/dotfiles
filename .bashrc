@@ -1,27 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-powerline-daemon -q
-# powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
-  source /usr/share/powerline/bindings/bash/powerline.sh
-fi
-if [ -f /etc/bash_completion  ]; then
-  alias vimrc="vim ~/.vimrc"
-  . /etc/bash_completion
-fi
-shopt -s cdable_vars
-set bell-style visible
-
-alias extron=/mnt/c/Users/jwilborn
-alias reg=/mnt/c/Users/jwilborn/device-registration/packages/service
-alias tap=/mnt/c/Users/jwilborn/em-tap-ui/web
-alias ua=/mnt/c/Users/jwilborn/upgrade-adapter
-
-# Powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
-      source /usr/share/powerline/bindings/bash/powerline.sh
-fi
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -88,7 +67,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls="ls -alLX --color=always --group-directories-first"
+    alias ls="ls -LXCpF --color=always --group-directories-first"
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -98,9 +77,9 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -al'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls'
 alias less='less -R'
 # Alias definitions.
 # You may want to put all your additions into a separate file like
