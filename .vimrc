@@ -16,6 +16,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'superDross/ticket.vim'
 " colors
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
@@ -57,6 +58,7 @@ set autoindent
 set smartindent
 set smarttab
 set foldmethod=indent
+set foldlevel=3
 exec "set listchars=tab:\uBB\uBB,nbsp:~,trail:\uB7"
 set list
 set suffixesadd+=.js
@@ -78,6 +80,8 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+let g:ticket_auto_open = 1
+let g:ticket_auto_save = 1
 let g:coc_global_extensions = ["coc-prettier", "coc-tsserver", "coc-html", "coc-json"]
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -171,7 +175,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
-
+nmap <leader>y Osc52Yank()
 " Allows yanking even though SSH!!!
 " source:
 " https://github.com/fortes/dotfiles/blob/master/stowed-files/nvim/.vimrc
@@ -253,9 +257,20 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+if system('uname -r') =~ "Microsoft"
+
+  augroup Yank
+
+    autocmd!
+
+    autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe',@")
+
+  augroup END
+
+endif
 let g:term_buf = 0
 let g:term_win = 0
-function! TermToggle(height)
+function! Termtoggle(height)
     if win_gotoid(g:term_win)
         hide
     else
@@ -276,11 +291,16 @@ function! TermToggle(height)
         let g:term_win = win_getid()
     endif
 endfunction
-" Toggle terminal on/off (neovim)
-nmap ` :call TermToggle(12)<CR>
-imap ` <Esc>:call TermToggle(12)<CR>
-tmap ` <C-\><C-n>:call TermToggle(12)<CR>
+autocmd sessionloadpost *.* silent call Settermid()
+function! Settermid()
+  let g:term_win =  bufwinid("!/bin/bash")
+endfunction
 
-" Terminal go back to normal mode
-tnoremap <Esc> <C-\><C-n>
-tnoremap :q! <C-\><C-n>:q!<CR>
+" toggle terminal on/off
+nmap ` :call Termtoggle(12)<cr>
+imap ` <esc>:call Termtoggle(12)<cr>
+tmap ` <c-\><c-n>:call Termtoggle(12)<cr>
+
+" terminal go back to normal mode
+tnoremap <esc> <c-\><c-n>
+tnoremap :q! <c-\><c-n>:q!<cr>
