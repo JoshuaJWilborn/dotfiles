@@ -16,6 +16,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'superDross/ticket.vim'
 Plug 'christoomey/vim-tmux-navigator'
 " colors
@@ -305,3 +306,4 @@ tmap ` <c-\><c-n>:call Termtoggle(12)<cr>
 " terminal go back to normal mode
 tnoremap <esc> <c-\><c-n>
 tnoremap :q! <c-\><c-n>:q!<cr>
+highlight Normal ctermfg=145 ctermbg=NONE guifg=#ABB2BF guibg=NONE
