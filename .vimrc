@@ -17,6 +17,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'superDross/ticket.vim'
+Plug 'christoomey/vim-tmux-navigator'
 " colors
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
