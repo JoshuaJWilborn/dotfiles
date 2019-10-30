@@ -28,3 +28,5 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
 fi
 export EDITOR=vim
 mesg n || true
+
+PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" ~/.pfetch
