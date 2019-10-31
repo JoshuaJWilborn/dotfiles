@@ -307,3 +307,4 @@ tmap ` <c-\><c-n>:call Termtoggle(12)<cr>
 tnoremap <esc> <c-\><c-n>
 tnoremap :q! <c-\><c-n>:q!<cr>
 highlight Normal ctermfg=145 ctermbg=NONE guifg=#ABB2BF guibg=NONE
+highlight NonText ctermfg=145 ctermbg=NONE guifg=#ABB2BF guibg=NONE
