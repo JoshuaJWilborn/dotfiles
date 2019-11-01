@@ -17,14 +17,11 @@ fi
 shopt -s cdable_vars
 set bell-style visible
 
-alias extron=/mnt/c/Users/jwilborn
-alias reg=/mnt/c/Users/jwilborn/device-registration/packages/service
-alias tap=/mnt/c/Users/jwilborn/em-tap-ui/web
-alias ua=/mnt/c/Users/jwilborn/upgrade-adapter
-
-# Powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
-      source /usr/share/powerline/bindings/bash/powerline.sh
-fi
+alias weather='curl -4 http://wttr.in/raleigh'
 export EDITOR=vim
 mesg n || true
+
+PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" ~/.pfetch
+shopt -s expand_aliases
+set -o vi
+

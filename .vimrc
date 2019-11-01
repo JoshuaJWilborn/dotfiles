@@ -35,7 +35,6 @@ autocmd BufWinLeave *.* mkview!
 autocmd BufWinEnter *.* silent loadview
 set cmdheight=2
 set visualbell
-set autochdir
 set hidden
 set rtp+=~/.fzf
 "Custom Config
@@ -306,4 +305,5 @@ tmap ` <c-\><c-n>:call Termtoggle(12)<cr>
 " terminal go back to normal mode
 tnoremap <esc> <c-\><c-n>
 tnoremap :q! <c-\><c-n>:q!<cr>
-highlight Normal ctermfg=145 ctermbg=NONE guifg=#ABB2BF guibg=NONE
+highlight Normal ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
