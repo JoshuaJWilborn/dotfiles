@@ -18,11 +18,10 @@ shopt -s cdable_vars
 set bell-style visible
 
 alias weather='curl -4 http://wttr.in/raleigh'
-# Powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
-      source /usr/share/powerline/bindings/bash/powerline.sh
-fi
 export EDITOR=vim
 mesg n || true
 
 PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" ~/.pfetch
+shopt -s expand_aliases
+set -o vi
+
