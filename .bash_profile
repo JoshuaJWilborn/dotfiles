@@ -11,7 +11,6 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
   source /usr/share/powerline/bindings/bash/powerline.sh
 fi
 if [ -f /etc/bash_completion  ]; then
-  alias vimrc="vim ~/.vimrc"
   . /etc/bash_completion
 fi
 shopt -s cdable_vars
@@ -24,4 +23,14 @@ mesg n || true
 PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" ~/.pfetch
 shopt -s expand_aliases
 set -o vi
+alias gp='git push -u origin HEAD'
+alias vimrc="vim ~/.vimrc"
+npmrc () {
+  if [ -f ~/.npmrc ]; then
+    mv ~/.npmrc ~/.npmrc.bak
+  else
+    mv ~/.npmrc.bak ~/.npmrc
+  fi
+}
 
+export NODE_OPTIONS="--max-old-space-size=8192"

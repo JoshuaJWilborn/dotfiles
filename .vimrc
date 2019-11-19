@@ -13,12 +13,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'superDross/ticket.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kkoomen/vim-doge'
 " colors
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
@@ -42,6 +42,7 @@ set showcmd
 set encoding=utf-8
 set fileencoding=utf-8
 set number
+set relativenumber
 set mouse=a
 set background=dark
 syntax on
@@ -59,12 +60,13 @@ set autoindent
 set smartindent
 set smarttab
 set foldmethod=indent
-set foldlevel=3
+set foldlevel=5
 exec "set listchars=tab:\uBB\uBB,nbsp:~,trail:\uB7"
 set list
 set suffixesadd+=.js
 set suffixesadd+=.ts
 set path+=$PWD/node_modules
+set autochdir
 let s:default_path = escape(&path, '\ ') " store default value of 'path'
 
 " Always add the current file's directory to the path and tags list if not
@@ -102,6 +104,7 @@ set iskeyword+=\-
 "joshdick/onedark.vim
 "colorscheme onedark
 "colorscheme gruvbox-material
+
 colorscheme iceberg
 hi Comment guifg=#808080
 " set color split line
@@ -151,7 +154,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -171,9 +173,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>y Osc52Yank()
@@ -192,15 +191,15 @@ function! Osc52Yank()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+xmap <space>f  <Plug>(coc-format)
+nmap <space>f  <Plug>(coc-format)
 
 augroup mygroup
   autocmd!
@@ -269,41 +268,10 @@ if system('uname -r') =~ "Microsoft"
   augroup END
 
 endif
-let g:term_buf = 0
-let g:term_win = 0
-function! Termtoggle(height)
-    if win_gotoid(g:term_win)
-        hide
-    else
-        botright new
-        exec "resize " . a:height
-        try
-            exec "buffer " . g:term_buf
-        catch
-            exec ":term ++curwin" 
-            let g:term_buf = bufnr("")
-            set nonumber
-            set norelativenumber
-            set signcolumn=no
-        endtry
-        if mode() != 'i' && mode() != 't'
-          call feedkeys('i')
-        endif
-        let g:term_win = win_getid()
-    endif
-endfunction
-autocmd sessionloadpost *.* silent call Settermid()
-function! Settermid()
-  let g:term_win =  bufwinid("!/bin/bash")
-endfunction
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" toggle terminal on/off
-nmap ` :call Termtoggle(12)<cr>
-imap ` <esc>:call Termtoggle(12)<cr>
-tmap ` <c-\><c-n>:call Termtoggle(12)<cr>
 
-" terminal go back to normal mode
-tnoremap <esc> <c-\><c-n>
-tnoremap :q! <c-\><c-n>:q!<cr>
 highlight Normal ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
+highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
+highlight CursorColumn term=reverse ctermbg=100 guibg=#576091

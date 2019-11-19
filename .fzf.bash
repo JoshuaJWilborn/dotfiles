@@ -10,4 +10,6 @@ fi
 
 # Key bindings
 # ------------
-source "/root/.fzf/shell/key-bindings.bash"
+if [ -f /root/.fzf/shell/key-bindings.bash ]; then
+  source "/root/.fzf/shell/key-bindings.bash"
+fi

@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # If not running interactively, don't do anything
+export chromedriver='/mnt/c/Windows/System32/chromedriver'
 [ -z "$PS1" ] && return
 
 export EDITOR=vim
@@ -109,3 +110,7 @@ fi
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
