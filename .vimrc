@@ -269,7 +269,10 @@ if system('uname -r') =~ "Microsoft"
 
 endif
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
+nmap <silent> <leader>z :Explore<CR>
+nmap <silent> <C-w><C-w> <C-^>
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
 
 highlight Normal ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
