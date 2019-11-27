@@ -32,5 +32,11 @@ npmrc () {
     mv ~/.npmrc.bak ~/.npmrc
   fi
 }
-
+export PATH=~/.local/bin:$PATH 
+export AWS_SDK_LOAD_CONFIG=1
 export NODE_OPTIONS="--max-old-space-size=8192"
+alias ticker="watch -n 2 -t -c ~/ticker.sh"
+alias ticker1="ticker TSLA MSFT AMD TGT DIS TWLO"
+alias open="'/mnt/c/Program Files/Firefox Developer Edition/firefox.exe'"
+alias scrum="open $STANDUP_URL"
+
