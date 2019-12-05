@@ -86,9 +86,10 @@ dir () {
         -I "NTUSER.*" -I "ntuser.*" -I "thumbs.db" -I "Thumbs.db" -I "desktop.ini"\
         -I "Application Data" -I "Cookies" -I "NetHood" -I "PrintHood" -I "Local Settings"\
         -I "Recent" -I "Searches" -I "SendTo" -I "Templates" -I "Downloads" -I "Documents"\
-        -I "3D Objects" -I "Desktop"
+        -I "3D Objects" -I "Desktop"\
+        $@
   else
-    /usr/bin/ls -LXCpF --color=always --group-directories-first
+    /usr/bin/ls -LXCpF --color=always --group-directories-first $@
   fi
 }
 # some more ls aliases
