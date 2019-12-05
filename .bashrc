@@ -69,7 +69,6 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls="ls -LXCpF --color=always --group-directories-first"
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -78,11 +77,26 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias ls="dir"
+dir () {
+  if [ $(pwd) == '/mnt/c/Users/jwilborn' ]; then
+    /usr/bin/ls -LXCpF --color=always --group-directories-first \
+        -I "AppData" -I "Contacts" -I "Favorites" -I "Links"\
+        -I "Music" -I "My Documents" -I "Pictures" -I "Videos" -I "Saved Games" -I "Start Menu" -I "OneDrive"\
+        -I "NTUSER.*" -I "ntuser.*" -I "thumbs.db" -I "Thumbs.db" -I "desktop.ini"\
+        -I "Application Data" -I "Cookies" -I "NetHood" -I "PrintHood" -I "Local Settings"\
+        -I "Recent" -I "Searches" -I "SendTo" -I "Templates" -I "Downloads" -I "Documents"\
+        -I "3D Objects" -I "Desktop"
+  else
+    /usr/bin/ls -LXCpF --color=always --group-directories-first
+  fi
+}
 # some more ls aliases
 alias ll='ls -al'
 alias la='ls -A'
 alias l='ls'
 alias less='less -R'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -114,3 +128,4 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
