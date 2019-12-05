@@ -66,7 +66,6 @@ set list
 set suffixesadd+=.js
 set suffixesadd+=.ts
 set path+=$PWD/node_modules
-set autochdir
 let s:default_path = escape(&path, '\ ') " store default value of 'path'
 
 " Always add the current file's directory to the path and tags list if not
@@ -276,5 +275,5 @@ let g:netrw_banner = 0
 
 highlight Normal ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
-highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
-highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
+
+autocmd SessionLoadPost * highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
