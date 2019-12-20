@@ -9,6 +9,9 @@ powerline-daemon -q
 # powerline
 if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
   source /usr/share/powerline/bindings/bash/powerline.sh
+
+if [ -f  /usr/lib/python3.8/site-packages/powerline/bindings/shell/powerline.sh ]; then
+  source /usr/lib/python3.8/site-packages/powerline/bindings/shell/powerline.sh
 fi
 if [ -f /etc/bash_completion  ]; then
   . /etc/bash_completion
