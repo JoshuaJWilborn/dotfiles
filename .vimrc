@@ -34,7 +34,8 @@ set viewoptions-=options
 autocmd BufWinLeave *.* mkview!
 autocmd BufWinEnter *.* silent loadview
 set cmdheight=2
-set visualbell
+" Disable both visual and audio bell
+set vb t_vb=
 set hidden
 set rtp+=~/.fzf
 "Custom Config
