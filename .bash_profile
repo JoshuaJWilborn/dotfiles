@@ -43,3 +43,4 @@ alias ticker1="ticker TSLA MSFT AMD TGT DIS TWLO"
 alias open="'/mnt/c/Program Files/Firefox Developer Edition/firefox.exe'"
 alias scrum="open $STANDUP_URL"
 
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
