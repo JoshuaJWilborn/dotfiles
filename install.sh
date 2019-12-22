@@ -1,7 +1,3 @@
-pacman -S $(cat ./.packages)
-
-sudo pip install powerline-status
-
 if [ ! -d ./.git ]; then
   git clone git@github.com:JoshuaJWilborn/vim.git
   rsync -a ./vim/ .
@@ -9,6 +5,9 @@ if [ ! -d ./.git ]; then
 	git remote remove origin
 	git remote add origin git@github.com:JoshuaJWilborn/vim.git
 fi 
+
+pacman -S $(cat ./.packages)
+sudo pip install powerline-status
 
 if [ ! -f $(which fzf) ]; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
