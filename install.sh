@@ -6,6 +6,8 @@ if [ ! -d ./.git ]; then
   git clone git@github.com:JoshuaJWilborn/vim.git
   rsync -a ./vim/ .
   rm -rf ./vim
+	git remote remove origin
+	git remote add origin git@github.com:JoshuaJWilborn/vim.git
 fi 
 
 if [ ! -f $(which fzf) ]; then
