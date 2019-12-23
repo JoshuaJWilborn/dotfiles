@@ -28,15 +28,11 @@ systemctl mask systemd-rfkill.socket
 # install linux brew
 if [ ! $(command -v brew) ]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-  test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-  test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-  test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-  echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 fi
 
 
 if [ ! -f /etc/systemd/system/undervolt.service ]; then
-  tee -a ~/.ssh/config <<- END
+  tee -a /etc/systemd/system/undervolt.service <<- END
     [Unit]
     Description=undervolt
     [Service]
@@ -46,7 +42,7 @@ END
 fi
 
 if [ ! -f /etc/systemd/system/undervolt-reset.service ]; then
-  tee -a ~/.ssh/config <<- END
+  tee -a /etc/systemd/system/undervolt-reset.service <<- END
     [Unit]
     Description=undervolt
     [Service]
