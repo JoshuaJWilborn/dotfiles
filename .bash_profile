@@ -36,5 +36,6 @@ export PATH=~/.local/bin:$PATH
 export AWS_SDK_LOAD_CONFIG=1
 export NODE_OPTIONS="--max-old-space-size=8192"
 
-
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
