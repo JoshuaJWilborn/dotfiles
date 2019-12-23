@@ -55,7 +55,7 @@ set hlsearch
 set directory^=$HOME/.vim/tmp//
 set softtabstop=0
 set tabstop=2
-set noexpandtab
+set expandtab
 set shiftwidth=2
 set autoindent
 set smartindent
