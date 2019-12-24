@@ -25,9 +25,9 @@ sudo systemctl mask systemd-rfkill.service
 sudo systemctl mask systemd-rfkill.socket
 
 # install linux brew
-if [ ! $(command -v brew) ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-fi
+#if [ ! $(command -v brew) ]; then
+#  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+#fi
 
 
 sudo tee -a /etc/systemd/system/undervolt.service <<- END
