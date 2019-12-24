@@ -6,7 +6,7 @@ if [ ! -d ~/.git ]; then
 	git remote add origin git@github.com:JoshuaJWilborn/vim.git
 fi 
 
-sudo pacman --needed --noconfirm -S $(cat ./.packages)
+sudo pacman --needed --noconfirm -S $(cat ~/.packages)
 sudo pip install powerline-status undervolt
 
 if [ ! $(command -v fzf) ]; then
