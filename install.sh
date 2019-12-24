@@ -1,4 +1,4 @@
-#/usr/bin/bash
+#!/usr/bin/bash
 if [ ! -d ~/.git ]; then
   git clone git@github.com:JoshuaJWilborn/vim.git ~/vim
   rsync -a ~/vim/ ~/
@@ -16,7 +16,7 @@ if [ ! $(command -v fzf) ]; then
   rm -rf ~/.fzf
 fi
 
-nohup vim +PlugInstall +CocInstall +qall >/dev/null 2>&1 &
+vim -E -s -u "~/.vimrc" +PlugInstall +CoCInstall +qall
 
 sudo echo TLP_ENABLE=1 | sudo tee /usr/share/defaults/tlp
 sudo systemctl enable tlp.service
@@ -31,23 +31,18 @@ if [ ! $(command -v brew) ]; then
 fi
 
 
-if [ ! -f /etc/systemd/system/undervolt.service ]; then
-  sudo tee -a /etc/systemd/system/undervolt.service <<- END
-    [Unit]
-    Description=undervolt
-    [Service]
-    Type=oneshot
-    ExecStart=`which undervolt` -v --core -135 --cache -135 --gpu -135 --analogio -135 --uncore -135
+sudo tee -a /etc/systemd/system/undervolt.service <<- END
+  [Unit]
+  Description=undervolt
+  [Service]
+  Type=oneshot
+  ExecStart=`which undervolt` -v --core -135 --cache -135 --gpu -135 --analogio -135 --uncore -135
 END
-fi
-
-if [ ! -f /etc/systemd/system/undervolt-reset.service ]; then
-  sudo tee -a /etc/systemd/system/undervolt-reset.service <<- END
-    [Unit]
-    Description=undervolt
-    [Service]
-    Type=oneshot
-    ExecStart=`which undervolt` -v --core -0 --cache -0 --gpu -0 --analogio -0 --uncore -0
+sudo tee -a /etc/systemd/system/undervolt-reset.service <<- END
+  [Unit]
+  Description=undervolt
+  [Service]
+  Type=oneshot
+  ExecStart=`which undervolt` -v --core -0 --cache -0 --gpu -0 --analogio -0 --uncore -0
 END
-fi
 source ~/.bashrc
