@@ -1,6 +1,9 @@
 if [ ! -d ~/.git ]; then
+  echo Cloning...
   git clone https://github.com/joshuajwilborn/vim.git ~/vim
+  echo Moving files...
   rsync -a ~/vim/ ~/
+  echo Cleaning up...
   rm -rf ~/vim
 	git remote remove origin
 	git remote add origin git@github.com:JoshuaJWilborn/vim.git
