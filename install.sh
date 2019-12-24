@@ -1,4 +1,3 @@
-#!/usr/bin/bash
 if [ ! -d ~/.git ]; then
   git clone git@github.com:JoshuaJWilborn/vim.git ~/vim
   rsync -a ~/vim/ ~/
