@@ -1,4 +1,5 @@
 #!/bin/bash
+echo Home directory: $HOME
 if [ ! -d ~/.git ]; then
   echo Cloning...
   git clone https://github.com/joshuajwilborn/vim.git ~/vim
