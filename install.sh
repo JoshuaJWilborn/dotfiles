@@ -7,6 +7,8 @@ if [ ! -d ~/.git ]; then
   rm -rf ~/vim
 	git remote remove origin
 	git remote add origin git@github.com:JoshuaJWilborn/vim.git
+else
+  echo Skipping git clone...
 fi 
 
 sudo pacman --needed --noconfirm -S $(cat ~/.packages)
