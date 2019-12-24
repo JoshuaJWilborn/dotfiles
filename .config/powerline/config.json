@@ -1,7 +1,10 @@
 {
-    "ext": {
-        "shell": {
-            "theme": "default_leftonly"
-        }
+  "ext": {
+    "shell": {
+      "theme": "default_leftonly"
+    },
+    "tmux": {
+      "theme": "josh"
     }
+  }
 }
