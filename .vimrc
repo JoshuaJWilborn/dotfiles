@@ -258,15 +258,15 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 if system('uname -r') =~ "Microsoft"
-
   augroup Yank
-
     autocmd!
-
     autocmd TextYankPost * :call system('/mnt/c/Windows/System32/clip.exe',@")
-
   augroup END
-
+else
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('/usr/bin/xclip -selection clipboard',@")
+  augroup END
 endif
 autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <silent> <leader>z :Explore<CR>
