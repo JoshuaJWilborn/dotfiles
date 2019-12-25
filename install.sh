@@ -37,6 +37,8 @@ fi
 
 vim -E -s -u "~/.vimrc" +PlugInstall +CoCInstall +qall
 
+timedatectl set-ntp true
+
 if [ $(command -v undervolt) ] && confirm "Install undervolt service(-135mv): "; then
   sudo tee -a /etc/systemd/system/undervolt.service <<- END
   [Unit]
