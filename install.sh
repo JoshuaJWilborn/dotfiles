@@ -29,6 +29,10 @@ if [ $(command -v pacman) ] && confirm "Install pacman and pip and pip packages:
   sudo systemctl mask systemd-rfkill.socket
 fi
 
+if [ $(command -v pacaur) ] && confirm "Install AUR packages: "; then
+  sudo pacaur --needed --noconfirm -S $(cat ~/.packages-aur
+fi
+
 if [ ! $(command -v fzf) ] && confirm "Install FZF (fuzzy file finder):"; then
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install
@@ -67,3 +71,6 @@ if [ ! $(command -v postman) ] && confirm "Install postman: "; then
   echo Postman installed, execute using 'postman' command
 fi
 
+if [ ! $(command -v optimus-switch) ] && confirm "Install optimus-switch: "; then
+  sudo source ~/optimus-switch-install.sh
+fi
