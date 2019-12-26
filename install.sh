@@ -57,4 +57,13 @@ END
   echo "Undervolt by typing 'undervolt' and reset by calling 'undervolt-reset'"
 fi
 
+if [ ! $(command -v postman) ] && confirm "Install postman: "; then
+  echo Downloading and extracting Postman Canary...
+  curl https://dl.pstmn.io/download/channel/canary/linux_64 | tar -xz
+  sudo mv PostmanCanary /usr/lib64/postman-canary
+  sudo echo '#!/bin/sh' | sudo tee /usr/bin/postman
+  sudo echo 'nohup /usr/lib64/postman-canary/PostmanCanary "$@" </dev/null >/dev/null 2>&1 &' | sudo tee -a /usr/bin/postman 
+  sudo chmod +x /usr/bin/postman
+  echo Postman installed, execute using 'postman' command
+fi
 

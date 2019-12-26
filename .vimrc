@@ -278,3 +278,18 @@ highlight Normal ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 autocmd SessionLoadPost * highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
+
+
+set wildignore+=*/tmp/*                                     " ctrlp - ignore files in tmp directories
+set wildignore+=*/target/*                                  " ctrlp - ignore files in target directories
+set wildignore+=*/build/*                                   " ctrlp - ignore gradle build directories
+set wildignore+=*.so                                        " ctrlp - ignore .so files
+set wildignore+=*.o                                         " ctrlp - ignore .o files
+set wildignore+=*.class                                     " ctrlp - ignore .class files
+set wildignore+=*.swp                                       " ctrlp - ignore .swp files
+set wildignore+=*.zip                                       " ctrlp - ignore .zip files
+set wildignore+=*.pdf                                       " ctrlp - ignore .pdf files
+set wildignore+=*/node_modules/*                            " ctrlp - ignore node modules
+set wildignore+=*/bower_components/*                        " ctrlp - ignore bower components
+set wildignore+=*/dist/*
+set wildignore+=*/lib/*
