@@ -30,7 +30,7 @@ if [ $(command -v pacman) ] && confirm "Install pacman and pip and pip packages:
 fi
 
 if [ $(command -v pacaur) ] && confirm "Install AUR packages: "; then
-  sudo pacaur --needed --noconfirm -S $(cat ~/.packages-aur
+  pacaur --needed --noconfirm -S $(cat ~/.packages-aur)
 fi
 
 if [ ! $(command -v fzf) ] && confirm "Install FZF (fuzzy file finder):"; then
