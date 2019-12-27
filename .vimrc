@@ -282,7 +282,6 @@ autocmd SessionLoadPost * highlight CursorColumn term=reverse ctermbg=100 guibg=
 
 set wildignore+=*/tmp/*                                     " ctrlp - ignore files in tmp directories
 set wildignore+=*/target/*                                  " ctrlp - ignore files in target directories
-set wildignore+=*/build/*                                   " ctrlp - ignore gradle build directories
 set wildignore+=*.so                                        " ctrlp - ignore .so files
 set wildignore+=*.o                                         " ctrlp - ignore .o files
 set wildignore+=*.class                                     " ctrlp - ignore .class files
@@ -293,3 +292,11 @@ set wildignore+=*/node_modules/*                            " ctrlp - ignore nod
 set wildignore+=*/bower_components/*                        " ctrlp - ignore bower components
 set wildignore+=*/dist/*
 set wildignore+=*/lib/*
+set wildignore+=*/package-lock.json
+
+" Auto open quickfix list after vimgrep
+augroup myvimrc
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    lwindow
+augroup END
