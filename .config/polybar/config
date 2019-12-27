@@ -1,0 +1,32 @@
+;=====================================================
+;     File Includes
+;=====================================================
+
+[section/base]
+include-file = $HOME/.config/polybar/master.conf
+include-file = $HOME/.config/polybar/modules.conf
+
+
+;=====================================================
+;     Openbox Bars
+;=====================================================
+
+[bar/openbox-bar]
+inherit = bar/master
+
+; Use $ xrandr -q | grep " connected" | cut -d ' ' -f1
+monitor = 
+monitor-fallback = 
+
+;tray-position = center
+;tray-padding =
+;tray-transparent = true
+;tray-background = #84a0c6
+
+modules-left   = manjaro workspaces
+modules-center =   date window_switch clock
+modules-right  = alsa battery pkg network temperature coreuse
+;modules-right  = alsa battery pkg network memory temperature coreuse
+
+fixed-center = true
+
