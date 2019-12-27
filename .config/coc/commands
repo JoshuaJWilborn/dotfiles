@@ -1,7 +1,0 @@
-tsserver.executeAutofix
-('jumpReferences')
-('document.jumpToNextSymbol')
-prettier.formatFile
-tsserver.organizeImports
-editor.action.organizeImport
-extensions.toggleAutoUpdate

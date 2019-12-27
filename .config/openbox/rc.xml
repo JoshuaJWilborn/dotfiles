@@ -937,5 +937,10 @@
       </position>
       <fullscreen>yes</fullscreen>
     </application>
+    <application name="Navigator">
+      <position force="yes">
+        <monitor>2</monitor> 
+      </position>
+    </application>
   </applications>
 </openbox_config>
