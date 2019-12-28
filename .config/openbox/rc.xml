@@ -415,14 +415,35 @@
         <command>playerctl next</command>
       </action>
     </keybind>
+
+    <keybind key="S-C-XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>xbacklight +0.1</command>
+      </action>
+    </keybind>
+    <keybind key="S-C-XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>xbacklight -0.1</command>
+      </action>
+    </keybind>
+    <keybind key="S-XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>xbacklight +1</command>
+      </action>
+    </keybind>
+    <keybind key="S-XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>xbacklight -1</command>
+      </action>
+    </keybind>
     <keybind key="XF86MonBrightnessUp">
       <action name="Execute">
-        <command>xbacklight +10</command>
+        <command>xbacklight +5</command>
       </action>
     </keybind>
     <keybind key="XF86MonBrightnessDown">
       <action name="Execute">
-        <command>xbacklight -10</command>
+        <command>xbacklight -5</command>
       </action>
     </keybind>
     <keybind key="Print">
@@ -928,8 +949,9 @@
     <manageDesktops>yes</manageDesktops>
   </menu>
   <applications>
-    <application class="*">
+    <application type="normal">
       <maximized>yes</maximized>
+      <decor>no</decor>
     </application>
     <application name="oblogout">
       <position force="no">
