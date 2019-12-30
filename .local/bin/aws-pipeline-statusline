@@ -24,7 +24,9 @@ do
   IFS=" ";
   read -r name stage region profile <<< "$service"
   result=`aws codepipeline get-pipeline-state --name $name --region=$region --profile=$profile --output json | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
-  prev=`cat /tmp/aws-pipeline-status/$name`
+  if [ -f "$basepath/$name" ]; then
+    prev=`cat $basepath/$name`
+  fi
   if [ $result == \"Failed\" ]; then
     failed=$(($failed + 1))
   else
