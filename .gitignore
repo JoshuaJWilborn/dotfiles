@@ -1,6 +1,7 @@
 *
 */
 */**/*
+!~/.bin/*
 !.readlinerc
 !.vimrc
 !.bashrc
