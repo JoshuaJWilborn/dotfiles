@@ -210,7 +210,19 @@
         </finalactions>
       </action>
     </keybind>
-    <keybind key="W-Tab">
+    <keybind key="S-A-Tab">
+      <action name="PreviousWindow">
+        <allDesktops>yes</allDesktops>
+        <finalactions>
+          <action name="SendToDesktop">
+            <desktop>1</desktop>
+          </action>
+          <action name="focus"/>
+          <action name="raise"/>
+        </finalactions>
+      </action>
+    </keybind>
+    <keybind key="A-Tab">
       <action name="NextWindow">
         <allDesktops>yes</allDesktops>
         <finalactions>
@@ -491,9 +503,9 @@
         <command>pavucontrol</command>
       </action>
     </keybind>
-    <keybind key="W-s">
+    <keybind key="W-Tab">
       <action name="Execute">
-        <command>skippy-xd</command>
+        <command>skippy-xd --toggle-window-picker</command>
       </action>
     </keybind>
     <keybind key="W-Return">

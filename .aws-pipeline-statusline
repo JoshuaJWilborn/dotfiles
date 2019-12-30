@@ -1,0 +1,28 @@
+#!/bin/bash
+# env variables to see: pipe delimited list of service names as $services
+# the $profile you want to use
+red=f00
+redicon=
+green=#0F0
+greenicon=
+region=us-east-1;
+IFS='|'; set -f
+stage=Development
+services=($services);
+failed=0
+succeeded=0
+for service in "${services[@]}"
+do
+  result=`aws codepipeline get-pipeline-state --name $service --region=$region --profile=$profile --output json | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
+  else
+    succeeded=$(($succeeded + 1))
+  fi
+done
+
+if [ $(($failed)) > 0 ]; then
+  result="%{F$red}$redicon$failed{F-}% "
+fi
+if [ $((succeeded)) > 0 ]; then
+  result="$result%{F$green}$greenicon$succeeded{F-}%"
+fi
+echo $result
