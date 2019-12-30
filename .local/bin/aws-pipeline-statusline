@@ -1,28 +1,52 @@
 #!/bin/bash
 # env variables to see: pipe delimited list of service names as $services
 # the $profile you want to use
+basepath=/tmp/aws-pipeline-status
+if [ ! -d $basepath ]; then
+  mkdir $basepath 
+fi
+config="pipeline.json"
+services="aws-adapter|userfilesystem-adapter"
+profile=eng-tooling
 red=f00
-redicon=
+redicon=●
 green=#0F0
-greenicon=
+greenicon=●
 region=us-east-1;
-IFS='|'; set -f
 stage=Development
 services=($services);
 failed=0
 succeeded=0
-for service in "${services[@]}"
+
+IFS=$'\n'; set -f
+for service in `cat $HOME/$config | jq -cr '.services[] | "\(.name) \(.stage) \(.region) \(.profile)"'`
 do
-  result=`aws codepipeline get-pipeline-state --name $service --region=$region --profile=$profile --output json | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
+  IFS=" ";
+  read -r name stage region profile <<< "$service"
+  result=`aws codepipeline get-pipeline-state --name $name --region=$region --profile=$profile --output json | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
+  prev=`cat /tmp/aws-pipeline-status/$name`
+  if [ $result == \"Failed\" ]; then
+    failed=$(($failed + 1))
   else
     succeeded=$(($succeeded + 1))
   fi
+  if [ $prev != $result ]; then
+    if [ $result == \"Failed\" ]; then
+      urgency=critical
+      time=0
+    else
+      urgency=low
+      time=5000
+    fi
+    notify-send -t $time -u $urgency $name-status "$name is $result"
+  fi
+  `echo $result > $basepath/$name`
 done
 
-if [ $(($failed)) > 0 ]; then
-  result="%{F$red}$redicon$failed{F-}% "
+if [ "$failed" -gt 0 ]; then
+  result="%{F$red}$redicon $failed "
 fi
 if [ $((succeeded)) > 0 ]; then
-  result="$result%{F$green}$greenicon$succeeded{F-}%"
+  result="$result%{F$green}$greenicon $succeeded"
 fi
 echo $result

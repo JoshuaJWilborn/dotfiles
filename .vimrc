@@ -278,6 +278,9 @@ augroup MyColors
   highlight GitGutterDelete ctermbg=NONE guibg=NONE |
 augroup END
 
+set directory=$HOME/.vim
+set backupdir=$HOME/.vim
+
 set wildignore+=*/tmp/*                                     " ctrlp - ignore files in tmp directories
 set wildignore+=*/target/*                                  " ctrlp - ignore files in target directories
 set wildignore+=*.so                                        " ctrlp - ignore .so files
