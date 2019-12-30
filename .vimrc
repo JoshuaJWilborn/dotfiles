@@ -27,8 +27,6 @@ Plug 'fcpg/vim-orbital'
 Plug 'ajmwagar/vim-deus'
 " /colors
 Plug 'sheerun/vim-polyglot'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 set viewoptions-=options
 autocmd BufWinLeave *.* mkview!
@@ -69,6 +67,10 @@ set suffixesadd+=.ts
 set path+=$PWD/node_modules
 let s:default_path = escape(&path, '\ ') " store default value of 'path'
 
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
 " Always add the current file's directory to the path and tags list if not
 " already there. Add it to the beginning to speed up searches.
 autocmd BufRead *
@@ -85,34 +87,22 @@ if exists('+termguicolors')
 endif
 let g:ticket_auto_open = 1
 let g:ticket_auto_save = 1
+
 let g:coc_global_extensions = ["coc-prettier", "coc-tsserver", "coc-html", "coc-json"]
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-" 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline_left_sep = ""
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ""
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.maxlinenr = ''
+
 set iskeyword+=\-
 "joshdick/onedark.vim
 "colorscheme onedark
 "colorscheme gruvbox-material
 
 colorscheme iceberg
-hi Comment guifg=#808080
-" set color split line
-set fillchars=vert:┃ " for vsplits
-set fillchars+=fold:· " for folds
-hi VertSplit guifg=#F08080
-" Directory color
-hi Directory guifg=#F08080
+"hi Comment guifg=#808080
+"" set color split line
+"set fillchars=vert:┃ " for vsplits
+"set fillchars+=fold:· " for folds
+"hi VertSplit guifg=#F08080
+"" Directory color
+"hi Directory guifg=#F08080
 "fzf
 nmap <c-p> :GFiles<CR>
 "matze/vim-move
@@ -274,11 +264,19 @@ nmap <silent> <C-w><C-w> <C-^>
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
-highlight Normal ctermbg=NONE guibg=NONE
-highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
-autocmd SessionLoadPost * highlight CursorColumn term=reverse ctermbg=100 guibg=#576091
-
+augroup MyColors
+  autocmd!
+  autocmd SessionLoadPost * highlight StatusLine ctermbg=NONE guibg=NONE |
+  highlight Normal ctermbg=NONE guibg=NONE |
+  highlight EndOfBuffer ctermbg=NONE guibg=NONE |
+  highlight CursorColumn term=reverse ctermbg=NONE guibg=#576091 |
+  highlight LineNr guifg=#6F78A9 ctermbg=NONE guibg=NONE |
+  highlight ExtraWhiteSpace ctermbg=NONE guibg=NONE |
+  highlight GitGutterChange ctermbg=NONE guibg=NONE |
+  highlight GitGutterAdd ctermbg=NONE guibg=NONE |
+  highlight GitGutterDelete ctermbg=NONE guibg=NONE |
+augroup END
 
 set wildignore+=*/tmp/*                                     " ctrlp - ignore files in tmp directories
 set wildignore+=*/target/*                                  " ctrlp - ignore files in target directories
@@ -296,7 +294,7 @@ set wildignore+=*/package-lock.json
 
 " Auto open quickfix list after vimgrep
 augroup myvimrc
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow
-    autocmd QuickFixCmdPost l*    lwindow
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l*    lwindow
 augroup END
