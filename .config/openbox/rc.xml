@@ -962,7 +962,6 @@
   </menu>
   <applications>
     <application type="normal">
-      <maximized>yes</maximized>
       <decor>no</decor>
     </application>
     <application name="oblogout">

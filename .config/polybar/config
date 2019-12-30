@@ -23,8 +23,8 @@ monitor-fallback =
 ;tray-transparent = true
 ;tray-background = #84a0c6
 
-modules-left   = workspaces
-modules-center = date clock
+modules-left   = date clock pipelines
+modules-center = workspaces
 modules-right  = alsa battery network temperature coreuse
 ;modules-right  = alsa battery pkg network memory temperature coreuse
 
