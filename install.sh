@@ -1,5 +1,4 @@
 #!/bin/bash
-source confirm.sh
 if [ ! -d ~/.git ] && confirm "Install dotfiles and configs"; then
   exit
   git clone https://github.com/joshuajwilborn/vim.git ~/vim
@@ -11,7 +10,7 @@ if [ ! -d ~/.git ] && confirm "Install dotfiles and configs"; then
   git remote add origin git@github.com:JoshuaJWilborn/vim.git
 else
   echo Skipping git clone...
-fi 
+fi
 
 if [ $(command -v pacman) ] && confirm "Install pacman and pip and pip packages:"; then
   echo "Installing pacman packages..."

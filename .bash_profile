@@ -22,7 +22,7 @@ set bell-style visible
 export EDITOR=vim
 mesg n || true
 
-PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" ~/.pfetch
+PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" pfetch 
 shopt -s expand_aliases
 set -o vi
 npmrc () {

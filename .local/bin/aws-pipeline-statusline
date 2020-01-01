@@ -5,7 +5,9 @@ basepath=/tmp/aws-pipeline-status
 if [ ! -d $basepath ]; then
   mkdir $basepath 
 fi
-config="pipeline.json"
+if [ ! -f $1 ]; then
+  config="pipeline.json"
+fi
 services="aws-adapter|userfilesystem-adapter"
 profile=eng-tooling
 red=f00
@@ -19,6 +21,9 @@ failed=0
 succeeded=0
 
 IFS=$'\n'; set -f
+if [ ! -f "$home/$config" ]; then
+  exit 1
+fi
 for service in `cat $HOME/$config | jq -cr '.services[] | "\(.name) \(.stage) \(.region) \(.profile)"'`
 do
   IFS=" ";
