@@ -28,7 +28,7 @@ sleep 1; nitrogen --restore &
 sleep 1; polybar -c $HOME/.config/polybar/config openbox-bar &
 
 ### launch conky
-manjaro-conky-session &
+#manjaro-conky-session &
 
 ### volumeicon
 sleep 1; volumeicon &

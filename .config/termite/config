@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Hack 12
+font = Hack 14
 scrollback_lines = 10000
 search_wrap = true
 icon_name = utilities-terminal
@@ -19,9 +19,9 @@ filter_unmatched_urls = true
 
 # *************************
 [colors]
-background = rgba(41,47,52,0.6)
-foreground = #d8d8d8
-foreground_bold = #d8d8d8
+background = #3c4c54
+foreground = #c5c8c6
+foreground_bold = #c5c8c6
 
 # Black, Gray, Silver, White
 color0 = #292f34
