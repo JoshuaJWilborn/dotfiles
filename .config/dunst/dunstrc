@@ -27,12 +27,22 @@
     frame_width = 3
     startup_notification = false
     dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/chromium
+    browser = /bin/firefox-developer-edition -new-tab
     icon_position = left
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [shortcuts]
-
+    close = ctrl+space
+ 
+    # close all notifications
+    close_all = ctrl+shift+space
+ 
+    # redisplay last message(s)
+    # On the US keyboard layout 'grave' is normally above TAB and left of '1'.
+    history = ctrl+grave
+ 
+    # context menu
+    context = ctrl+shift+period
 [urgency_low]
     background = "#29353B"
     foreground = "#c0c5ce"
