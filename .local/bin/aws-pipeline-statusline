@@ -5,55 +5,83 @@ basepath=/tmp/aws-pipeline-status
 if [ ! -d $basepath ]; then
   mkdir $basepath 
 fi
-if [ ! -f $1 ]; then
-  config="pipeline.json"
+if [ ! -f "$1" ]; then
+  config="$HOME/pipeline.json"
+else
+  config=$1
 fi
 services="aws-adapter|userfilesystem-adapter"
 profile=eng-tooling
-red=f00
+red=#cc6666
 redicon=●
-green=#0F0
+green=#b5bd68
 greenicon=●
 region=us-east-1;
 stage=Development
-services=($services);
+services=($services)
 failed=0
 succeeded=0
 
 IFS=$'\n'; set -f
-if [ ! -f "$home/$config" ]; then
+if [ ! -f "$config" ]; then
+  echo Missing Config $config
   exit 1
 fi
-for service in `cat $HOME/$config | jq -cr '.services[] | "\(.name) \(.stage) \(.region) \(.profile)"'`
+for service in `cat $config | jq -cr '.services[] | "\(.name) \(.stage) \(.region) \(.profile)"'`
 do
   IFS=" ";
+  result=""
   read -r name stage region profile <<< "$service"
-  result=`aws codepipeline get-pipeline-state --name $name --region=$region --profile=$profile --output json | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
+  # we start a detached screen so we can inject an AWS MFA code
+  screens=`screen -list | grep $name`
+  if [ -z "$screens" ]; then
+    screen -d -S $name -m sh
+  fi
+  pipe="pipe-$name"
+  if [ ! -p $pipe ]; then
+    mkfifo $pipe
+  fi
+  screen -S $name -p 0 -X stuff "aws codepipeline get-pipeline-state --name $name --region $region --profile $profile --output json >$pipe ^M"
+  sleep 3
+  while read -t 1 line <$pipe
+  do
+    result="$result$line"
+  done
+  #result=`cat "$HOME/.$name.log" | sed -ne '/^{/,$ p' | sed '/^}/q' | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
+  if [ -z "$result" ]; then
+    mfapipe="mfa-$pipe"
+    if [ ! -p "$mfapipe" ]; then
+      mkfifo "$mfapipe"
+    fi
+    termite -e "bash -c 'aws-pipeline-mfa-to-service $name'" &
+    read _ <$mfapipe
+    rm $mfapipe
+  fi
+  final=`echo $result | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
   if [ -f "$basepath/$name" ]; then
     prev=`cat $basepath/$name`
   fi
-  if [ $result == \"Failed\" ]; then
+  if [ "$final" = \"Failed\" ]; then
     failed=$(($failed + 1))
   else
     succeeded=$(($succeeded + 1))
   fi
-  if [ $prev != $result ]; then
-    if [ $result == \"Failed\" ]; then
+  if [ "$prev" != "$final" ]; then
+    if [ "$final" == \"Failed\" ]; then
       urgency=critical
-      time=0
     else
       urgency=low
-      time=5000
     fi
-    notify-send -t $time -u $urgency $name-status "$name is $result"
+    notify-send -u $urgency $name "$name is $final"
   fi
-  `echo $result > $basepath/$name`
+  `echo $final > $basepath/$name`
 done
 
+string=""
 if [ "$failed" -gt 0 ]; then
-  result="%{F$red}$redicon $failed "
+  string="%{F$red}$redicon $failed "
 fi
 if [ $((succeeded)) > 0 ]; then
-  result="$result%{F$green}$greenicon $succeeded"
+  string="$string%{F$green}$greenicon $succeeded"
 fi
-echo $result
+echo "$string"
