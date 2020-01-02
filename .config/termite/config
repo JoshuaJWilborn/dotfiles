@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Hack 14
+font = NotoSansDisplay-Thin 14
 scrollback_lines = 10000
 search_wrap = true
 icon_name = utilities-terminal
@@ -19,7 +19,8 @@ filter_unmatched_urls = true
 
 # *************************
 [colors]
-background = #3c4c54
+
+background = rgba(60, 76, 84, 0.9)
 foreground = #c5c8c6
 foreground_bold = #c5c8c6
 
