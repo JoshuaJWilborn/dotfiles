@@ -19,43 +19,43 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>Manjaro-Openbox-Matcha-dark-sea</name>
+    <name>JWilborn Custom</name>
     <titleLayout>NLIMC</titleLayout>
     <keepBorder>no</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>Hack</name>
-      <size>11</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="InactiveWindow">
-      <name>Hack</name>
-      <size>11</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Normal</weight>
       <slant>Italic</slant>
     </font>
     <font place="MenuHeader">
-      <name>Hack</name>
-      <size>11</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="MenuItem">
-      <name>Hack</name>
-      <size>10</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
     <font place="ActiveOnScreenDisplay">
-      <name>Hack</name>
-      <size>10</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Bold</weight>
       <slant>Normal</slant>
     </font>
     <font place="InactiveOnScreenDisplay">
-      <name>Hack</name>
-      <size>10</size>
+      <name>Noto Sans Display Light</name>
+      <size>12</size>
       <weight>Normal</weight>
       <slant>Normal</slant>
     </font>
