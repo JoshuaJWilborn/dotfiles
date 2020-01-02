@@ -22,7 +22,7 @@
     <name>JWilborn Custom</name>
     <titleLayout>NLIMC</titleLayout>
     <keepBorder>no</keepBorder>
-    <animateIconify>yes</animateIconify>
+    <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Noto Sans Display Light</name>
       <size>12</size>

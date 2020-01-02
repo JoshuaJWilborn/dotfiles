@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# $1 is mfa code $2 if service name
+name=$1
+pipe="mfa-pipe-$name"
+read -p "Enter MFA: " mfa
+screen -S $name -p 0 -X stuff "$mfa^M"
+bash -c "echo 'done' >$pipe"
