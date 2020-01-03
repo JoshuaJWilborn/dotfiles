@@ -1,24 +1,9 @@
 # ~/.profile: executed by Bourne-compatible login shells.
-
-if [ "$BASH" ]; then
-  if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-  fi
-fi
-powerline-daemon -q
-# powerline
-if [ -f /usr/share/powerline/bindings/bash/powerline.sh  ]; then
-  source /usr/share/powerline/bindings/bash/powerline.sh
-fi
-if [ -f  /usr/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh ]; then
-  source /usr/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
-fi
 if [ -f /etc/bash_completion  ]; then
   . /etc/bash_completion
 fi
 shopt -s cdable_vars
 set bell-style visible
-
 export EDITOR=vim
 mesg n || true
 
@@ -38,4 +23,8 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
 	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
+if [ -z "$BASHRC_LOADED" ]; then
+  source ~/.bashrc
 fi

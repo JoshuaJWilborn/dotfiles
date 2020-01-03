@@ -10,7 +10,6 @@ if [ ! -f "$1" ]; then
 else
   config=$1
 fi
-services="aws-adapter|userfilesystem-adapter"
 profile=eng-tooling
 red=#cc6666
 redicon=●
@@ -43,7 +42,7 @@ do
   fi
   screen -S $name -p 0 -X stuff "aws codepipeline get-pipeline-state --name $name --region $region --profile $profile --output json >$pipe ^M"
   sleep 3
-  while read -t 1 line <$pipe
+  while read -t 3 line <$pipe
   do
     result="$result$line"
   done
@@ -56,6 +55,7 @@ do
     termite -e "bash -c 'aws-pipeline-mfa-to-service $name'" &
     read _ <$mfapipe
     rm $mfapipe
+    sleep 3
   fi
   final=`echo $result | jq ".stageStates[] | select(.stageName == \"$stage\") | .latestExecution.status"`
   if [ -f "$basepath/$name" ]; then
@@ -72,7 +72,7 @@ do
     else
       urgency=low
     fi
-    notify-send -u $urgency $name "$name is $final"
+    notify-send -u $urgency $name "$final\n https://console.aws.amazon.com/codesuite/codepipeline/pipelines/$name/view?region=$region"
   fi
   `echo $final > $basepath/$name`
 done

@@ -9,7 +9,7 @@
     show_age_threshold = 60
     word_wrap = yes
     ignore_newline = no
-    geometry = "0x20-10+40"
+    geometry = "400x20-10+40"
     shrink = yes
     transparency = 0
     idle_threshold = 60

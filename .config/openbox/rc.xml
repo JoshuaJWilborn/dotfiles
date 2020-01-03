@@ -414,7 +414,7 @@
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>playerctl play-pause</command>
+        <command>bash -c "echo 'p' >~/.config/pianobar/ctl"</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPrev">
@@ -424,7 +424,7 @@
     </keybind>
     <keybind key="XF86AudioNext">
       <action name="Execute">
-        <command>playerctl next</command>
+        <command>bash -c "echo 'n' >~/.config/pianobar/ctl"</command>
       </action>
     </keybind>
 
