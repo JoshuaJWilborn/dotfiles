@@ -1,7 +1,8 @@
 {
   "ext": {
     "shell": {
-      "theme": "default_leftonly"
+      "theme": "default_leftonly",
+      "colorscheme": "default_leftonly"
     },
     "tmux": {
       "theme": "josh"
