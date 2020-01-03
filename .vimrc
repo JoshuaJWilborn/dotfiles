@@ -279,6 +279,7 @@ augroup MyColors
   autocmd SessionLoadPost * highlight GitGutterDelete ctermbg=NONE guibg=NONE
   autocmd SessionLoadPost * highlight SignColumn ctermbg=NONE guibg=NONE
   autocmd SessionLoadPost * highlight RedundantSpaces ctermfg=NONE guifg=NONE ctermbg=RED guibg=RED | match RedundantSpaces /\s\+$/
+  autocmd SessionLoadPost * highlight Comment ctermfg=grey guifg=grey ctermbg=NONE guibg=NONE | match RedundantSpaces /\s\+$/
 augroup END
 
 set directory=$HOME/.vim
