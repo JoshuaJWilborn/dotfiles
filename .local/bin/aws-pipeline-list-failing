@@ -8,5 +8,7 @@ for path in $failed
 do
   IFS="\/";
   read -r _ _ _ name <<< "$path"
-  echo -e "$red$name: failing"
+  echo -e "$red$name: failing $reset https://console.aws.amazon.com/codesuite/codepipeline/pipelines/$name/view"
 done
+
+sleep 10

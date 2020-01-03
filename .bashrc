@@ -2,7 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 # If not running interactively, don't do anything
-export chromedriver='/mnt/c/Windows/System32/chromedriver'
 [ -z "$PS1" ] && return
 
 export EDITOR=vim
@@ -50,11 +49,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -126,9 +120,26 @@ fi
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
 
+bind '"\t":menu-complete'
+bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on"
+bind "set menu-complete-display-prefix on"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-powerline-daemon -q
+RGB_TO_FG() {
+  echo -e "\033[38;2;$1;$2;$3m"
+}
+RGB_TO_BG() {
+  echo -e "\033[48;2;$1;$2;$3m"
+}
+export CLEAR_STYLE="\033[0m"
+export LIGHT_BLUE_BG=`RGB_TO_BG 129 162 190`
+export LIGHT_BLUE_FG=`RGB_TO_FG 129 162 190`
+
+export DARK_BLUE_BG=`RGB_TO_BG 95 129 157`
+export DARK_BLUE_FG=`RGB_TO_FG 95 129 157`
+export PS1="$DARK_BLUE_BG \w (\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))$CLEAR_STYLE$DARK_BLUE_FG$CLEAR_STYLE "
 
