@@ -1,0 +1,4 @@
+cpupower set -b 1
+tlp ac
+systemctl start undervolt-reset
+
