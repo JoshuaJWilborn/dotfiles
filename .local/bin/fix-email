@@ -1,5 +1,5 @@
 if [ $# -ne 3 ]; then
-  echo 'Must be called as `fix_email.sh "<old_email>" "<new_email>" "<full name>"`'
+  echo 'Must be called as `fix-email "<old_email>" "<new_email>" "<full name>"`'
   exit 1
 fi
 

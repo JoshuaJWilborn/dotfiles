@@ -1,0 +1,3 @@
+cpupower set -b 15
+tlp bat
+systemctl start undervolt

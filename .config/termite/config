@@ -20,7 +20,7 @@ filter_unmatched_urls = true
 # *************************
 [colors]
 
-background = rgba(60, 76, 84, 0.9)
+background = rgba(60, 76, 84, 0.97)
 foreground = #c5c8c6
 foreground_bold = #c5c8c6
 
