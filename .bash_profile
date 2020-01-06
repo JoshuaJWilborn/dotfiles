@@ -7,7 +7,20 @@ set bell-style visible
 export EDITOR=vim
 mesg n || true
 
-PF_INFO="ascii title os host kernel uptime pkgs memory shell palette" pfetch 
+# we cache neofetch daily because it's sometimes slow
+if [ ! -f ~/.neofetch-cache ]; then
+  neofetch > ~/.neofetch-cache
+else
+  written=$(date -r ~/.neofetch-cache +%s)
+  day=$((60*60*24))
+  yesterday=$((`date +%s` - $day))
+  if (($written < $yesterday)); then
+    echo caching neofetch
+    neofetch > ~/.neofetch-cache
+  fi
+fi
+cat ~/.neofetch-cache
+
 shopt -s expand_aliases
 set -o vi
 npmrc () {
@@ -22,7 +35,7 @@ export AWS_SDK_LOAD_CONFIG=1
 export NODE_OPTIONS="--max-old-space-size=8192"
 
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
 if [ -z "$BASHRC_LOADED" ]; then
