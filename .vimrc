@@ -261,22 +261,20 @@ nmap <silent> <C-w><C-w> <C-^>
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
-augroup MyColors
-  autocmd!
-  autocmd SessionLoadPost * highlight Syntax ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight Normal ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight EndOfBuffer ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight CursorColumn term=reverse ctermbg=NONE guibg=#576091 
-  autocmd SessionLoadPost * highlight LineNr guifg=#6F78A9 ctermbg=NONE guibg=NONE 
-  autocmd SessionLoadPost * highlight ExtraWhiteSpace ctermbg=NONE guibg=NONE 
-  autocmd SessionLoadPost * highlight QuickFixLine ctermbg=NONE guibg=NONE 
-  autocmd SessionLoadPost * highlight GitGutterChange ctermbg=NONE guibg=NONE 
-  autocmd SessionLoadPost * highlight GitGutterAdd ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight GitGutterDelete ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight SignColumn ctermbg=NONE guibg=NONE
-  autocmd SessionLoadPost * highlight RedundantSpaces ctermfg=NONE guifg=NONE ctermbg=RED guibg=RED | match RedundantSpaces /\s\+$/
-  autocmd SessionLoadPost * highlight Comment ctermfg=grey guifg=grey ctermbg=NONE guibg=NONE | match RedundantSpaces /\s\+$/
-augroup END
+
+highlight Syntax ctermbg=NONE guibg=NONE
+highlight Normal ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
+highlight CursorColumn term=reverse ctermbg=NONE guibg=#576091
+highlight LineNr guifg=#6F78A9 ctermbg=NONE guibg=NONE
+highlight ExtraWhiteSpace ctermbg=NONE guibg=NONE
+highlight QuickFixLine ctermbg=NONE guibg=NONE
+highlight GitGutterChange ctermbg=NONE guibg=NONE
+highlight GitGutterAdd ctermbg=NONE guibg=NONE
+highlight GitGutterDelete ctermbg=NONE guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
+highlight RedundantSpaces ctermfg=NONE guifg=NONE ctermbg=RED guibg=RED | match RedundantSpaces /\s\+$/
+highlight Comment ctermfg=grey guifg=grey ctermbg=NONE guibg=NONE | match RedundantSpaces /\s\+$/
 
 set scrolloff=10
 set directory=$HOME/.vim
