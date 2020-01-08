@@ -13,16 +13,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'neoclide/coc-neco'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'superDross/ticket.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'kkoomen/vim-doge'
 " colors
-Plug 'sainnhe/gruvbox-material'
-Plug 'arcticicestudio/nord-vim'
 Plug 'cocopon/iceberg.vim/'
 Plug 'fcpg/vim-orbital'
 Plug 'ajmwagar/vim-deus'
@@ -230,7 +225,8 @@ command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.org
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
+set statusline+=%F
+set laststatus=2
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -282,6 +278,7 @@ augroup MyColors
   autocmd SessionLoadPost * highlight Comment ctermfg=grey guifg=grey ctermbg=NONE guibg=NONE | match RedundantSpaces /\s\+$/
 augroup END
 
+set scrolloff=10
 set directory=$HOME/.vim
 set backupdir=$HOME/.vim
 

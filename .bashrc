@@ -130,12 +130,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 RGB_TO_FG() {
-  echo -e "\033[38;2;$1;$2;$3m"
+  echo -e "\[\033[38;2;$1;$2;$3m\]"
 }
 RGB_TO_BG() {
-  echo -e "\033[48;2;$1;$2;$3m"
+  echo -e "\[\033[48;2;$1;$2;$3m\]"
 }
-export CLEAR_STYLE="\033[0m"
+export CLEAR_STYLE="\[\033[0m\]"
 export LIGHT_BLUE_BG=`RGB_TO_BG 129 162 190`
 export LIGHT_BLUE_FG=`RGB_TO_FG 129 162 190`
 

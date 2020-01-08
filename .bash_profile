@@ -30,7 +30,8 @@ npmrc () {
     mv ~/.npmrc.bak ~/.npmrc
   fi
 }
-export PATH=~/.local/bin:$PATH 
+export PATH=~/.local/bin:$PATH
+export PATH=~/aws-codepipeline-status/bin:$PATH
 export AWS_SDK_LOAD_CONFIG=1
 export NODE_OPTIONS="--max-old-space-size=8192"
 
