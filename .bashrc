@@ -129,6 +129,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+awsstatus() {
+  echo -e `aws-pipeline-status-plain | aws-pipeline-format-bash`
+}
 RGB_TO_FG() {
   echo -e "\[\033[38;2;$1;$2;$3m\]"
 }
@@ -141,5 +144,14 @@ export LIGHT_BLUE_FG=`RGB_TO_FG 129 162 190`
 
 export DARK_BLUE_BG=`RGB_TO_BG 95 129 157`
 export DARK_BLUE_FG=`RGB_TO_FG 95 129 157`
-export PS1="$DARK_BLUE_BG \w (\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))$CLEAR_STYLE$DARK_BLUE_FG$CLEAR_STYLE "
+promptsetup() {
+export PS1="$DARK_BLUE_BG \w (\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))\
+$CLEAR_STYLE$DARK_BLUE_BG\
+ [$(awsstatus)\
+$CLEAR_STYLE$DARK_BLUE_BG]\
+$CLEAR_STYLE$DARK_BLUE_FG\
+$CLEAR_STYLE "
+  aws-pipeline-prompt-mfa
+}
 
+PROMPT_COMMAND=promptsetup
