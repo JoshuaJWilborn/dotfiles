@@ -30,12 +30,13 @@ npmrc () {
     mv ~/.npmrc.bak ~/.npmrc
   fi
 }
-export PATH=~/.local/bin:$PATH 
+export PATH=~/.local/bin:$PATH
+export PATH=~/aws-codepipeline-status/bin:$PATH
 export AWS_SDK_LOAD_CONFIG=1
 export NODE_OPTIONS="--max-old-space-size=8192"
 
 if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
-	eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
 if [ -z "$BASHRC_LOADED" ]; then

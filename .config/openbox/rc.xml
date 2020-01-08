@@ -19,9 +19,9 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>JWilborn Custom</name>
+    <name>Manjaro-Openbox-Matcha-dark-sea</name>
     <titleLayout>NLIMC</titleLayout>
-    <keepBorder>no</keepBorder>
+    <keepBorder>yes</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Noto Sans Display Light</name>
@@ -414,7 +414,7 @@
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>bash -c "echo 'p' >~/.config/pianobar/ctl"</command>
+        <command>bash -c "echo 'p' &gt;~/.config/pianobar/ctl"</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPrev">
@@ -424,10 +424,9 @@
     </keybind>
     <keybind key="XF86AudioNext">
       <action name="Execute">
-        <command>bash -c "echo 'n' >~/.config/pianobar/ctl"</command>
+        <command>bash -c "echo 'n' &gt;~/.config/pianobar/ctl"</command>
       </action>
     </keybind>
-
     <keybind key="S-C-XF86MonBrightnessUp">
       <action name="Execute">
         <command>xbacklight +0.1</command>
@@ -972,7 +971,7 @@
     </application>
     <application name="Navigator">
       <position force="yes">
-        <monitor>2</monitor> 
+        <monitor>2</monitor>
       </position>
     </application>
   </applications>
