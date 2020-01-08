@@ -1,14 +1,9 @@
 percent=$1
-graphical=`systemctl status lightdm | grep 'active (running)'`
 brightness_loc=/sys/class/backlight/intel_backlight/brightness
 max_brightness_loc=/sys/class/backlight/intel_backlight/max_brightness
 
-if [ ! -z "$graphical" ]; then
-  xbacklight -set $percent
-else
-  brightness=`cat $brightness_loc`
-  max=`cat $max_brightness_loc`
-  input=`echo "$max / 100 * $percent / 1" | bc`
-  echo $input
-  echo $input > $brightness_loc
-fi
+brightness=`cat $brightness_loc`
+max=`cat $max_brightness_loc`
+input=`echo "$max / 100 * $percent / 1" | bc`
+echo $input
+echo $input > $brightness_loc

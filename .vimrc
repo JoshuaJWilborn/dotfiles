@@ -229,8 +229,9 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%F
+set laststatus=2
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
