@@ -1,3 +1,5 @@
+acpi=`acpi`
+charging=`echo $acpi | grep charging`
 string=`acpi | grep -oE "[0-9]{1,3}%"`
 int=`echo $string | grep -oE "[0-9]+"`
 green='#[fg=#b5bd68]'
@@ -6,15 +8,23 @@ orange='#[fg=de935f]'
 red='#[fg=cc6666]'
 
 if (("$int" >= 80)); then
-  icon="$green "
+color=$green
+icon=" "
 elif (("$int" >= 60)); then
-icon="$yellow "
+color=$yellow
+icon=" "
 elif (("$int" >= 40)); then
-icon="$orange"
+color=$orange
+icon=" "
 elif (("$int" >= 20)); then
-icon="$red"
+color=$red
+icon=" "
 else
-icon="$red"
+color=$red
+icon=" "
 fi
 
-echo -e "$icon $string"
+if [ -z $charging ]; then
+chargeicon=" "
+fi
+echo -e "$color$chargeicon$icon $string"
