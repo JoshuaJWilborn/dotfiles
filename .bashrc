@@ -3,7 +3,6 @@
 # for examples
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
 export EDITOR=vim
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -13,8 +12,8 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=9999
+HISTFILESIZE=9999
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -50,16 +49,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -101,15 +90,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [ -f /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
@@ -125,9 +105,50 @@ bind "set show-all-if-ambiguous on"
 bind "set completion-ignore-case on"
 bind "set menu-complete-display-prefix on"
 
+shopt -s cdable_vars
+set bell-style visible
+export EDITOR=vim
+mesg n || true
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+shopt -s expand_aliases
+set -o vi
+export PATH=/home/jwilborn/.local/bin:$PATH
+export PATH=/home/jwilborn/aws-codepipeline-status/bin:$PATH
+export AWS_SDK_LOAD_CONFIG=1
+export NODE_OPTIONS="--max-old-space-size=8192"
+
+npmrc () {
+  if [ -f ~/.npmrc ]; then
+    mv ~/.npmrc ~/.npmrc.bak
+  else
+    mv ~/.npmrc.bak ~/.npmrc
+  fi
+}
+
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
+if [ -f /etc/bash_completion  ]; then
+  . /etc/bash_completion
+fi
+
+# we cache neofetch daily because it's sometimes slow
+if [ ! -f ~/.neofetch-cache ]; then
+  neofetch > ~/.neofetch-cache
+else
+  written=$(date -r ~/.neofetch-cache +%s)
+  day=$((60*60*24))
+  yesterday=$((`date +%s` - $day))
+  if (($written < $yesterday)); then
+    neofetch > ~/.neofetch-cache
+  fi
+fi
+cat ~/.neofetch-cache
 
 awsstatus() {
   echo -e `aws-pipeline-status-plain | aws-pipeline-format-bash`

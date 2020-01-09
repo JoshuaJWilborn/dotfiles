@@ -1,6 +1,5 @@
 [user]
-	name  = Joshua Wilborn 
-  email = jwilborn@extron.com
+	name  = Joshua Wilborn
 [alias]
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [merge]
