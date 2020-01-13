@@ -304,3 +304,5 @@ augroup END
 
 nnoremap c[ :cprev <CR>
 nnoremap c] :cnext <CR>
+
+nnoremap <C-S-f> :execute":silent Ggrep ".input("Search:")<CR>
