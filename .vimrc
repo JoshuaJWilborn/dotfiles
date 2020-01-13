@@ -103,7 +103,7 @@ colorscheme iceberg
 nmap <c-p> :GFiles<CR>
 "matze/vim-move
 set updatetime=300
-
+set smartcase
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -301,3 +301,6 @@ augroup myvimrc
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
 augroup END
+
+nnoremap c[ :cprev <CR>
+nnoremap c] :cnext <CR>
