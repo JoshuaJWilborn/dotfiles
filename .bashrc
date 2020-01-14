@@ -141,17 +141,17 @@ if [ -f /etc/bash_completion  ]; then
 fi
 
 # we cache neofetch daily because it's sometimes slow
-if [ ! -f ~/.neofetch-cache ]; then
-  neofetch > ~/.neofetch-cache
-else
-  written=$(date -r ~/.neofetch-cache +%s)
-  day=$((60*60*24))
-  yesterday=$((`date +%s` - $day))
-  if (($written < $yesterday)); then
-    neofetch > ~/.neofetch-cache
-  fi
-fi
-cat ~/.neofetch-cache
+#if [ ! -f ~/.neofetch-cache ]; then
+#  neofetch > ~/.neofetch-cache
+#else
+#  written=$(date -r ~/.neofetch-cache +%s)
+#  day=$((60*60*24))
+#  yesterday=$((`date +%s` - $day))
+#  if (($written < $yesterday)); then
+#    neofetch > ~/.neofetch-cache
+#  fi
+#fi
+#cat ~/.neofetch-cache
 
 awsstatus() {
   echo -e `aws-pipeline-status-plain | aws-pipeline-format-bash`
@@ -179,3 +179,4 @@ $CLEAR_STYLE "
 }
 
 PROMPT_COMMAND=promptsetup
+bind '"\C-f":"jgrep \n"'
