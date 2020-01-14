@@ -17,6 +17,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'mtth/scratch.vim'
 " colors
 Plug 'cocopon/iceberg.vim/'
 Plug 'fcpg/vim-orbital'
