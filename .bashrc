@@ -180,3 +180,5 @@ $CLEAR_STYLE "
 
 PROMPT_COMMAND=promptsetup
 bind '"\C-f":"jgrep \n"'
+
+

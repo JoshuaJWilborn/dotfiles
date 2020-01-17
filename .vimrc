@@ -101,7 +101,11 @@ colorscheme iceberg
 "" Directory color
 "hi Directory guifg=#F08080
 "fzf
-nmap <c-p> :GFiles<CR>
+nmap <c-p>p :GFiles<CR>
+nmap <c-p><c-p> :GFiles<CR>
+nmap <c-p>f :Files<CR>
+nmap <c-p><c-f> :Files<CR>
+nmap <c-g> :Buffers<CR>
 "matze/vim-move
 set updatetime=300
 set smartcase
@@ -306,4 +310,4 @@ augroup END
 nnoremap c[ :cprev <CR>
 nnoremap c] :cnext <CR>
 
-nnoremap <C-S-f> :execute":silent Ggrep ".input("Search:")<CR>
+nnoremap f :execute":silent Ggrep ".input("Search:")<CR>

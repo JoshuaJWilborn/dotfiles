@@ -25,6 +25,7 @@ sleep 1; nitrogen --restore &
 
 ### launch tint2 and polybar
 #sleep 1; manjaro-tint2-session &
+PATH="/home/jwilborn/aws-codepipeline-status/bin:$PATH"
 sleep 1; polybar -c $HOME/.config/polybar/config openbox-bar &
 
 ### launch conky
@@ -47,4 +48,4 @@ xdg-user-dirs-gtk-update &
 
 ### enable numlock
 ### uncomment next line
-#numlockx &
+numlockx &
