@@ -1,0 +1,17 @@
+#!/bin/bash
+if [ ! -d .git ]; then
+  echo "Must be run at root of project"
+  exit
+fi
+
+function clean-node-modules() {
+  rm -rf node_modules package-lock.json ./packages/**/node_modules ./packages/**/package-lock.json
+}
+
+function bootstrap() {
+  npm i
+  npm run bootstrap || echo No bootstrapping command.
+}
+
+clean-node-modules
+bootstrap

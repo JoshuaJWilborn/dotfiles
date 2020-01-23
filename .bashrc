@@ -3,7 +3,7 @@
 # for examples
 export PATH=/home/jwilborn/.local/bin:$PATH
 export PATH=/home/jwilborn/aws-codepipeline-status/bin:$PATH
-
+TERM=xterm-256color
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 export EDITOR=vim
