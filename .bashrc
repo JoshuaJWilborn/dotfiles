@@ -11,6 +11,8 @@ export EDITOR=vim
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
 
+shopt -s extglob
+shopt -s globstar
 # append to the history file, don't overwrite it
 shopt -s histappend
 
