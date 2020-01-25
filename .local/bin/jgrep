@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+  read -p Search: q
+else
+  q="$1"
+fi
+grep --color=always -Rli "$q" --exclude='.*' --exclude-dir=node_modules --exclude-dir='.git' ./
+exit

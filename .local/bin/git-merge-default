@@ -1,0 +1,9 @@
+#!/bin/bash
+hasdevelop=$(git branch | git grep "develop$")
+if [ ! -z "$hasdevelop" ]; then
+  branch=develop
+else
+  branch=master
+fi
+
+git merge origin/$branch $@

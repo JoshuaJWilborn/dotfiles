@@ -3,7 +3,7 @@
 # for examples
 export PATH=/home/jwilborn/.local/bin:$PATH
 export PATH=/home/jwilborn/aws-codepipeline-status/bin:$PATH
-
+TERM=xterm-256color
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 export EDITOR=vim
@@ -11,6 +11,8 @@ export EDITOR=vim
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoredups:ignorespace
 
+shopt -s extglob
+shopt -s globstar
 # append to the history file, don't overwrite it
 shopt -s histappend
 

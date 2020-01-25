@@ -1,0 +1,28 @@
+#!/bin/bash
+branch=$1
+if [ -z "$1" ]; then
+  echo Must have branch as first argument
+  exit 1
+fi
+if [ -z "$2" ]; then
+  echo Must have a commit message as second argument
+  exit 1
+fi
+
+find . -mindepth 2 -maxdepth 2 -type f -name package.json \
+ -execdir git reset --hard \;\
+ -execdir git clean -f \;\
+ -execdir git default \;\
+ -execdir git pull \;\
+ -execdir git checkout -B $branch \;
+
+find . -mindepth 2 -maxdepth 4 -type f -name package.json \
+ -exec sed -r -i -e 's/("@nestjs.+": )"(.+)"/\1"^6.10.14"/g' \{\} \;
+
+find . -mindepth 2 -maxdepth 2 -type f -name package.json \
+ -execdir extron-setup \;\
+ -execdir git add . \;\
+ -execdir git commit -am "$2" \;\
+ -execdir git merge-default -s recursive -Xours --no-edit \;\
+ -execdir git push -u origin $branch --force \;\
+
