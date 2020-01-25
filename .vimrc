@@ -19,7 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mtth/scratch.vim'
 " colors
-Plug 'cocopon/iceberg.vim/'
+Plug 'cocopon/iceberg.vim'
 Plug 'fcpg/vim-orbital'
 Plug 'ajmwagar/vim-deus'
 " /colors
