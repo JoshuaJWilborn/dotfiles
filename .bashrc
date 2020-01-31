@@ -78,12 +78,12 @@ dir () {
         -I "3D Objects" -I "Desktop"\
         $@
   else
-    /usr/bin/ls -LXCpF --color=always --group-directories-first $@
+    /usr/bin/ls -LXCpFh --color=always --group-directories-first $@
   fi
 }
 # some more ls aliases
-alias ll='ls -al'
-alias la='ls -A'
+alias ll='ls -Alh'
+alias la='ls -Ah'
 alias l='ls'
 alias less='less -R'
 
