@@ -105,7 +105,7 @@ nmap <c-p>p :GFiles<CR>
 nmap <c-p><c-p> :GFiles<CR>
 nmap <c-p>f :Files<CR>
 nmap <c-p><c-f> :Files<CR>
-nmap <c-g> :Buffers<CR>
+nmap <c-b> :Buffers<CR>
 "matze/vim-move
 set updatetime=300
 set smartcase
@@ -229,8 +229,15 @@ command! -nargs=? Fold :call     CocActionAsync('fold', <f-args>)
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%F
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
 set laststatus=2
 " Using CocList
 " Show all diagnostics
@@ -310,4 +317,4 @@ augroup END
 nnoremap c[ :cprev <CR>
 nnoremap c] :cnext <CR>
 
-nnoremap f :execute":silent Ggrep ".input("Search:")<CR>
+nnoremap F :execute":silent Ggrep ".input("Search:")<CR>
