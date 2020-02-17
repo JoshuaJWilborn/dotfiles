@@ -12,4 +12,5 @@ alias st="st -f 'Hack:size=12'"
 alias makekey="ssh-keygen -t rsa -C"
 alias tmux="systemd-run --scope --user tmux attach"
 alias hibernate="systemctl hibernate"
+alias editmodified='vim $(git ls-files . --modified --exclude-standard --others)'
 

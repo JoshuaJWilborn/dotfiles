@@ -189,8 +189,9 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-xmap <space>f  <Plug>(coc-format)
-nmap <space>f  <Plug>(coc-format)
+xmap <space>f  :CocCommand prettier.formatFile<CR>
+nmap <space>f  :CocCommand prettier.formatFile<CR>
+
 
 augroup mygroup
   autocmd!
