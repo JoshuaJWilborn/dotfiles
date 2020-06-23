@@ -16,10 +16,11 @@ shopt -s extglob
 shopt -s globstar
 # append to the history file, don't overwrite it
 shopt -s histappend
-
+# Don't put duplicate lines in the history.
+export HISTCONTROL=ignoredups
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=9999
-HISTFILESIZE=9999
+HISTSIZE=99999
+HISTFILESIZE=99999
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -171,6 +172,7 @@ export LIGHT_BLUE_FG=`RGB_TO_FG 129 162 190`
 export DARK_BLUE_BG=`RGB_TO_BG 95 129 157`
 export DARK_BLUE_FG=`RGB_TO_FG 95 129 157`
 promptsetup() {
+  history -a
 export PS1="$DARK_BLUE_BG \w (\$(git branch 2>/dev/null | grep '^*' | colrm 1 2))\
 $CLEAR_STYLE$DARK_BLUE_BG\
  [$(awsstatus)\
@@ -180,6 +182,9 @@ $CLEAR_STYLE "
   aws-pipeline-prompt-mfa
 }
 
+assume_role() {
+  aws sts assume-role --role-arn "arn:aws:iam::771302058135:role/admin" --role-session-name josh --profile dev
+}
 PROMPT_COMMAND=promptsetup
 bind '"\C-f":"jgrep \n"'
 

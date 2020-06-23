@@ -1,4 +1,4 @@
-Bash (POSIX Shells)
+Bash Basics(POSIX Shells)
 
 1. Pipes and Redirects
    a) >
@@ -6,18 +6,10 @@ Bash (POSIX Shells)
    c) |
 
 2. Useful commands
-   a) man / apropos
-   b) grep / git grep
-   c) find
-   d) pushd / popd
-   e) locate
-   f) sed
-   g) alias
+   a) find
+   b) sed
 
 3. Shortcuts
    a) ctrl-r
    b) ctrl-z
-   c) vim mode for readline (inputrc)
-   d) !#
-   e) !!
 

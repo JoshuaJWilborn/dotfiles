@@ -2,7 +2,7 @@
 	name  = Joshua Wilborn
 	email = jwilborn@extron.com
 [alias]
-  tree = log --graph --decorate --pretty=oneline --abbrev-commit
+  tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Cblue - %cn %Creset' --abbrev-commit --date=relative
 [merge]
   tool = vimdiff
 [mergetool]
@@ -10,6 +10,9 @@
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [core]
-	editor = vim
+  editor = vim
+  excludesfile = /home/jwilborn/.gitignore_global
 [credential]
   helper = store
+[pull]
+	ff = only

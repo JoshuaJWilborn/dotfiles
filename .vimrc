@@ -13,8 +13,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'wellle/context.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mtth/scratch.vim'
@@ -56,7 +58,7 @@ set autoindent
 set smartindent
 set smarttab
 set foldmethod=indent
-set foldlevel=5
+set foldlevel=10
 exec "set listchars=tab:\uBB\uBB,nbsp:~,trail:\uB7"
 set list
 set suffixesadd+=.js
@@ -92,7 +94,7 @@ set iskeyword+=\-
 "colorscheme onedark
 "colorscheme gruvbox-material
 
-colorscheme iceberg
+colorscheme deus
 "hi Comment guifg=#808080
 "" set color split line
 "set fillchars=vert:┃ " for vsplits
@@ -291,7 +293,8 @@ highlight Comment ctermfg=grey guifg=grey ctermbg=NONE guibg=NONE | match Redund
 
 set scrolloff=10
 set directory=$HOME/.vim
-set backupdir=$HOME/.vim
+set backupdir=$HOME/.vim/swp
+set undodir=~/.vim/undo
 
 set wildignore+=*/bower_components/*                        " ctrlp - ignore bower components
 set wildignore+=*.class                                     " ctrlp - ignore .class files

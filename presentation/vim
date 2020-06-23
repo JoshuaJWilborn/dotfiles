@@ -1,12 +1,12 @@
 Vim (Vi Improved)
 
 a. modal editing
-b. text objects
-c. macros
-d. code completion / intellisense
-e. plugins and customization
-f. spacevim
-g. resources
-  1) reddit.com/r/vim
-  2) https://vim.fandom.com/wiki/Vim_Tips_Wiki
-  3) #vim on freenode IRC
+b. how to exit insert mode: <ESC>  <C-c>  <C-[>
+c. slash search
+d. :s/  replad.
+e. custom commands
+f. text objects   "Put some new text"
+g. macros
+h. code completion / intellisense - coc-nvim
+i. plugins and customization - ~/.vimrc - powerline
+j. spacevim
